@@ -91,7 +91,7 @@ def crossref_record(item):
     titles = strings(item.get("title"))
     titles_journal = strings(item.get("container-title"))
     authors = [text(" ".join(strings([entry.get("given"), entry.get("family")]))) or text(entry.get("name"))
-               for entry in item.get("author", []) if isinstance(entry, dict)]
+               for entry in item.get("author") or [] if isinstance(entry, dict)]
     doi_value = doi(item.get("DOI"))
     resource = ((item.get("resource") or {}).get("primary") or {}).get("URL")
     retracts = [target for update in item.get("update-to") or []
@@ -120,7 +120,7 @@ def openalex_record(item):
     return {
         "doi": doi(item.get("doi")), "source": "OpenAlex", "source_id": safe_url(item.get("id")),
         "title": text(item.get("title")),
-        "authors": [name for entry in item.get("authorships", [])
+        "authors": [name for entry in item.get("authorships") or []
                     if (name := text((entry.get("author") or {}).get("display_name")))],
         "journal_reported": text(source.get("display_name")),
         "issns": strings(source.get("issn")), "journal_id": safe_url(source.get("id"))
@@ -134,12 +134,15 @@ def openalex_record(item):
     }
 
 
-def crossref_pages(journals, start, end, *, indexed=False) -> Iterator[list[dict]]:
+def crossref_pages(journals, start, end, *, indexed=False, publication_floor=None) -> Iterator[list[dict]]:
     # Crossref ORs repeated ISSN filters. Use the full scan for journals that
     # deposit abstracts and for discovery independent of search-engine ranking.
     field = "index-date" if indexed else "pub-date"
     issn_filters = [f"issn:{issn}" for journal in journals for issn in journal["issns"]]
-    filters = ",".join([f"from-{field}:{start}", f"until-{field}:{end}", "type:journal-article", *issn_filters])
+    bounds = [f"from-{field}:{start}", f"until-{field}:{end}"]
+    if publication_floor:
+        bounds.append(f"from-pub-date:{publication_floor}")
+    filters = ",".join([*bounds, "type:journal-article", *issn_filters])
     cursor = "*"
     for _ in range(MAX_PAGES):
         page = fetch(CROSSREF, {"filter": filters, "cursor": cursor, "rows": 250,

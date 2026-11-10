@@ -3,6 +3,7 @@
 import os
 import re
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -358,23 +359,29 @@ def refresh_approved_abstracts(state, journals, rules, reviews, licenses, now):
     return None
 
 
-def discover(journals, start, end, *, indexed_since=None, only=None):
+def discover(journals, start, end, *, indexed_since=None, indexed_until=None, only=None):
     rows = []
     statuses = {}
     plans = {
-        "Crossref": lambda: crossref_pages(journals, indexed_since or start, end, indexed=indexed_since is not None),
+        "Crossref": lambda: crossref_pages(journals, indexed_since or start, indexed_until or end,
+                                          indexed=indexed_since is not None,
+                                          publication_floor=months_before(end, 3) if indexed_since else None),
         "OpenAlex": lambda: openalex_pages(journals, start, end),
     }
-    for name, pages in plans.items():
-        if only and name != only:
-            continue
-        try:
-            records = [row for page in pages() for row in page]
-        except SourceError as exc:
-            statuses[name] = {"state": "degraded", "detail": str(exc), "count": 0}
-        else:
-            rows.extend(records)
-            statuses[name] = {"state": "ok", "count": len(records)}
+
+    def collect(pages):
+        return [row for page in pages() for row in page]
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        running = {name: pool.submit(collect, pages) for name, pages in plans.items() if not only or name == only}
+        for name, future in running.items():
+            try:
+                records = future.result()
+            except SourceError as exc:
+                statuses[name] = {"state": "degraded", "detail": str(exc), "count": 0}
+            else:
+                rows.extend(records)
+                statuses[name] = {"state": "ok", "count": len(records)}
     if not any(status["state"] == "ok" and status["count"] for status in statuses.values()):
         detail = ", ".join(status.get("detail", name + ": empty") for name, status in statuses.items())
         raise SourceError("Discovery produced no usable rows: " + detail)
@@ -448,7 +455,8 @@ def synchronize(path: Path, *, now=None):
             openalex_ok = state.get("last_source_success", {}).get("OpenAlex")
             if openalex_ok:
                 start = min(start, date.fromisoformat(openalex_ok) - LOOKBACK)
-        rows, statuses = discover(journals, start, day, indexed_since=indexed_since)
+        indexed_until = now.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S") if indexed_since else None
+        rows, statuses = discover(journals, start, day, indexed_since=indexed_since, indexed_until=indexed_until)
         apply_batch(state, rows, journals, rules, reviews, licenses, now)
         statuses["Semantic Scholar"] = enrich(state, journals, rules, reviews, licenses, now)
         licensing_status = refresh_approved_abstracts(state, journals, rules, reviews, licenses, now)

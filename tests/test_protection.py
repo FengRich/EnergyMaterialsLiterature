@@ -1,10 +1,11 @@
 import tempfile
 import unittest
+from datetime import timedelta
 from pathlib import Path
 from unittest.mock import patch
 
 from tests import test_pipeline as fixtures
-from energy_lit.model import abstract_digest, empty_state
+from energy_lit.model import abstract_digest, empty_state, week
 from energy_lit.sources import SourceError, crossref_record
 from energy_lit.sync import apply_batch, exclusive_sync, make_reports, read_state, store_state, synchronize
 
@@ -68,6 +69,29 @@ class ProtectionTests(unittest.TestCase):
         lookup.return_value = fixtures.observation()
         refresh_approved_abstracts(state, self.setup.journals, self.setup.rules, {}, license, fixtures.NOW)
         self.assertEqual(state["papers"][fixtures.DOI]["abstract"], fixtures.ABSTRACT)
+
+    @patch("energy_lit.sync.discover")
+    def test_same_week_manual_sync_keeps_one_edition(self, discover):
+        status = {"Crossref": {"state": "ok", "count": 1},
+                  "OpenAlex": {"state": "ok", "count": 1}}
+        discover.side_effect = lambda *args, **kwargs: (
+            [fixtures.observation(), fixtures.observation("OpenAlex")],
+            {key: dict(value) for key, value in status.items()},
+        )
+        state = empty_state()
+        self.setup.batch(state, [fixtures.observation()])
+        state["last_success"] = fixtures.NOW.isoformat()
+        make_reports(state, self.setup.rules, week(fixtures.NOW))
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "state.json"
+            store_state(path, state, empty_state(), self.setup.journals)
+            first = synchronize(path, now=fixtures.NOW + timedelta(hours=1))
+            second = synchronize(path, now=fixtures.NOW + timedelta(hours=2))
+            self.assertEqual(first["reports"], second["reports"])
+            self.assertEqual(len(second["reports"]), 1)
+            self.assertEqual(len(second["papers"]), 1)
+            self.assertEqual(second["papers"][fixtures.DOI]["first_seen"], state["papers"][fixtures.DOI]["first_seen"])
+            self.assertEqual(second["papers"][fixtures.DOI]["publication_date"], "2026-10-31")
 
     @patch("energy_lit.sync.discover", side_effect=SourceError("network unavailable"))
     def test_severe_failure_preserves_previous_file(self, discover):

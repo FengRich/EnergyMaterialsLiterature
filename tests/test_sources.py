@@ -40,3 +40,12 @@ class PaginationTests(unittest.TestCase):
         ]
         with self.assertRaisesRegex(SourceError, "truncated"):
             list(openalex_pages(load_journals(), "2026-11-01", "2026-11-02"))
+
+
+    @patch("energy_lit.sources.fetch")
+    def test_indexed_crossref_stays_inside_publication_horizon(self, fetch):
+        fetch.return_value = {"message": {"items": []}}
+        list(crossref_pages(load_journals(), "2026-10-20", "2026-11-10", indexed=True,
+                            publication_floor="2026-08-10"))
+        self.assertIn("from-pub-date:2026-08-10", fetch.call_args.args[1]["filter"])
+        self.assertIn("from-index-date:2026-10-20", fetch.call_args.args[1]["filter"])

@@ -6,7 +6,7 @@
 
 调度使用 GitHub Actions 的 IANA 时区字段，`0 9 * * 1` 配合 `Asia/Shanghai` 表示北京时间周一 09:00（UTC 01:00）。GitHub 可能延迟调度。工作流按组串行，且默认分支发生并发更新时，普通推送会被拒绝。重跑从最新默认分支开始。 [GitHub 调度说明](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)
 
-可选配置为 GitHub Actions secrets 中的 `OPENALEX_API_KEY`、`S2_API_KEY` 和 `CROSSREF_EMAIL`。只使用免费接口。OpenAlex 匿名入口走普通页码，有免费 key 时可以走游标。Crossref 匿名接口的共享限流、Semantic Scholar 429 和数据源索引时差可能降低覆盖率。更新时保留失败来源与历史批次的状态。
+可选配置为 GitHub Actions secrets 中的 `OPENALEX_API_KEY`、`S2_API_KEY` 和 `CROSSREF_EMAIL`。只使用免费接口。OpenAlex 匿名入口走普通页码，有免费 key 时可以走游标。Crossref 匿名接口的共享限流、Semantic Scholar 429 和数据源索引时差可能降低覆盖率。更新时保留失败来源与历史批次的状态。Crossref 的增量重索引检索采用 21 日重叠窗口、固定索引结束时间和最近三个月的出版范围。更早发表的论文若随后才进入索引，可能不会自动发现。已收录记录继续保留，缺摘要仍会按 DOI 重试。
 
 ## 写入与发布保护
 
