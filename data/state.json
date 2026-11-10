@@ -1,19 +1,10 @@
 {
-  "backfill_issues": [
-    {
-      "count": 0,
-      "detail": "OpenAlex: HTTP 429",
-      "from": "2026-10-26",
-      "source": "OpenAlex",
-      "state": "degraded",
-      "to": "2026-11-01"
-    }
-  ],
+  "backfill_issues": [],
   "last_source_success": {
     "Crossref": "2026-11-10",
     "OpenAlex": "2026-11-10"
   },
-  "last_success": "2026-11-10T08:51:02+00:00",
+  "last_success": "2026-11-10T08:57:59+00:00",
   "papers": {
     "10.1002/adma.202506181": {
       "abstract": null,
@@ -193998,6 +193989,102 @@
       "title": "Deciphering Electrocatalytic Sulfur Reduction Reactions in Al–S Batteries via Single-Particle Electrodes",
       "type": "journal-article"
     },
+    "10.1021/jacs.6c08725": {
+      "abstract": null,
+      "abstract_evidence": null,
+      "abstract_hash": "df2f8fb70853f401193dcf8c9fbf34d563de3a6d9869a9ba988601cb0da7e437",
+      "abstract_license": null,
+      "abstract_retry_at": null,
+      "abstract_source": "OpenAlex",
+      "abstract_status": "Withheld",
+      "authors": [
+        "Wei Nie",
+        "Thomas R. Dittrich",
+        "Yuying Gao",
+        "Ziyuan Wang",
+        "Dongfeng Li",
+        "Fusai Sun",
+        "Qian Li",
+        "Xiuli Wang",
+        "Fengtao Fan",
+        "Can Li"
+      ],
+      "doi": "10.1021/jacs.6c08725",
+      "doi_url": "https://doi.org/10.1021/jacs.6c08725",
+      "domains": [
+        "Electrocatalysis"
+      ],
+      "edition": null,
+      "extensions": {},
+      "first_seen": "2026-11-10T08:57:59+00:00",
+      "id": "10.1021/jacs.6c08725",
+      "issns": [
+        "0002-7863",
+        "1520-5126",
+        "1943-2984"
+      ],
+      "journal": "Journal of the American Chemical Society",
+      "journal_ids": [
+        "https://openalex.org/S111155417"
+      ],
+      "last_updated": "2026-11-10T08:57:59+00:00",
+      "license_retry_at": null,
+      "methods": [],
+      "online_date": null,
+      "print_date": null,
+      "publication_date": "2026-10-31",
+      "publisher_url": "https://doi.org/10.1021/jacs.6c08725",
+      "rank": 0,
+      "reason": "Experimental evidence only in available metadata",
+      "reported_journal": "Journal of the American Chemical Society",
+      "review": null,
+      "sources": {
+        "OpenAlex": {
+          "authors": [
+            "Wei Nie",
+            "Thomas R. Dittrich",
+            "Yuying Gao",
+            "Ziyuan Wang",
+            "Dongfeng Li",
+            "Fusai Sun",
+            "Qian Li",
+            "Xiuli Wang",
+            "Fengtao Fan",
+            "Can Li"
+          ],
+          "evidence": {
+            "abstract_hash": "df2f8fb70853f401193dcf8c9fbf34d563de3a6d9869a9ba988601cb0da7e437",
+            "auto_reason": "Experimental evidence only in available metadata",
+            "auto_status": "Rejected",
+            "domains": [
+              "Electrocatalysis"
+            ],
+            "methods": [],
+            "rank": 0
+          },
+          "evidence_title": "Operando Imaging of Charge Transfer and Photoelectrochemical Water Oxidation at Defect-Rich Grain Boundaries",
+          "issns": [
+            "0002-7863",
+            "1520-5126",
+            "1943-2984"
+          ],
+          "journal_id": "https://openalex.org/S111155417",
+          "journal_reported": "Journal of the American Chemical Society",
+          "publication_date": "2026-10-31",
+          "publisher_url": "https://doi.org/10.1021/jacs.6c08725",
+          "retracted": false,
+          "source": "OpenAlex",
+          "source_id": "https://openalex.org/W4411565671",
+          "source_updated": "2026-11-09T13:22:03.289127",
+          "title": "Operando Imaging of Charge Transfer and Photoelectrochemical Water Oxidation at Defect-Rich Grain Boundaries",
+          "type": "article"
+        }
+      },
+      "status": "Rejected",
+      "supersedes": null,
+      "title": "Operando Imaging of Charge Transfer and Photoelectrochemical Water Oxidation at Defect-Rich Grain Boundaries",
+      "type": "article"
+    },
     "10.1021/jacs.6c08864": {
       "abstract": null,
       "abstract_evidence": null,
@@ -264142,16 +264229,16 @@
   ],
   "sources": {
     "Crossref": {
-      "count": 6390,
+      "count": 1986,
       "state": "ok"
     },
     "OpenAlex": {
-      "count": 1488,
+      "count": 1428,
       "state": "ok"
     },
     "Semantic Scholar": {
-      "count": 9,
-      "state": "ok"
+      "count": 0,
+      "state": "no candidates"
     }
   },
   "version": 1
