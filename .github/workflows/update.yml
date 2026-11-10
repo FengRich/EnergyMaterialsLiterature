@@ -1,0 +1,143 @@
+name: Update literature and deploy Pages
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'
+      timezone: 'Asia/Shanghai'
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: literature-pages
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: write
+    outputs:
+      revision: ${{ steps.persist.outputs.revision }}
+      ready: ${{ steps.persist.outputs.ready }}
+      failed: ${{ steps.persist.outputs.failed }}
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6.0.0
+        with:
+          python-version-file: .python-version
+      - run: python -m unittest discover -s tests -v
+      - name: Retrieve and validate metadata
+        id: retrieve
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+          S2_API_KEY: ${{ secrets.S2_API_KEY }}
+          CROSSREF_EMAIL: ${{ secrets.CROSSREF_EMAIL }}
+        run: |
+          result=0
+          timeout --signal=INT --kill-after=15s 30m python -m energy_lit sync || result=$?
+          case "$result" in
+            0) echo 'failed=false' >> "$GITHUB_OUTPUT" ;;
+            3|124|137) echo 'failed=true' >> "$GITHUB_OUTPUT" ;;
+            *) exit "$result" ;;
+          esac
+      - name: Validate and persist
+        id: persist
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          RETRIEVAL_FAILED: ${{ steps.retrieve.outputs.failed }}
+        run: |
+          python -m energy_lit validate
+          python -m energy_lit build
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if [[ "$RETRIEVAL_FAILED" == 'true' ]]; then
+            # Preserve a completed part of an initial backfill. Never replace the live state.
+            if [[ -f data/state.bootstrap.json ]]; then
+              git add -- data/state.bootstrap.json
+            fi
+          else
+            git add -A -- data
+          fi
+          if ! git diff --cached --quiet; then
+            git commit -m 'Persist literature sync'
+            git push origin "HEAD:refs/heads/$DEFAULT_BRANCH"
+          fi
+          ready=$(python -c 'from energy_lit.model import ROOT; from energy_lit.sync import read_state; print(str(bool(read_state(ROOT / "data/state.json")["last_success"])).lower())')
+          {
+            echo "revision=$(git rev-parse HEAD)"
+            echo "ready=$ready"
+            echo "failed=$RETRIEVAL_FAILED"
+          } >> "$GITHUB_OUTPUT"
+      - name: Create recoverable snapshot
+        if: steps.persist.outputs.ready == 'true' && steps.persist.outputs.failed == 'false'
+        run: git archive --format=zip --output=literature-snapshot.zip HEAD data config
+      - name: Retain snapshot
+        if: steps.persist.outputs.ready == 'true' && steps.persist.outputs.failed == 'false'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: literature-snapshot-${{ github.run_id }}-${{ github.run_attempt }}
+          path: literature-snapshot.zip
+          if-no-files-found: error
+          retention-days: 90
+
+  build:
+    needs: sync
+    if: needs.sync.outputs.ready == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          ref: ${{ needs.sync.outputs.revision }}
+          persist-credentials: false
+      - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6.0.0
+        with:
+          python-version-file: .python-version
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+        id: pages
+      - name: Build validated site
+        env:
+          PAGES_URL: ${{ steps.pages.outputs.base_url }}
+          REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
+          RETRIEVAL_FAILED: ${{ needs.sync.outputs.failed }}
+        run: |
+          args=()
+          if [[ "$RETRIEVAL_FAILED" == 'true' ]]; then
+            args+=(--retrieval-failed)
+          fi
+          python -m energy_lit build --site-url "$PAGES_URL" --repository "$REPOSITORY_URL" "${args[@]}"
+      - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+        id: deployment
+
+  report-failure:
+    needs: [sync, deploy]
+    if: always() && needs.sync.outputs.failed == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - run: |
+          echo '::error::Literature retrieval failed. Preserved the last validated dataset and any bootstrap checkpoint.'
+          exit 1

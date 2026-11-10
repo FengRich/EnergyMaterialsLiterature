@@ -1,0 +1,62 @@
+{
+  "battery": [
+    ["10.1002/aenm.202101112", "Advanced Energy Materials", "Accepted"],
+    ["10.1002/aenm.202300646", "Advanced Energy Materials", "Accepted"],
+    ["10.1002/aenm.202502765", "Advanced Energy Materials", "Accepted"],
+    ["10.1021/jacs.3c01834", "Journal of the American Chemical Society", "Accepted"]
+  ],
+  "electrocatalysis": [
+    ["10.1021/acsenergylett.3c00068", "ACS Energy Letters", "Accepted"],
+    ["10.1021/acscatal.2c01861", "ACS Catalysis", "Accepted"],
+    ["10.1002/anie.202308349", "Angewandte Chemie International Edition", "Accepted"],
+    ["10.1021/acscatal.5c08550", "ACS Catalysis", "Accepted"],
+    ["10.1002/adma.202414976", "Advanced Materials", "Accepted"],
+    ["10.1002/aenm.202405155", "Advanced Energy Materials", "Accepted"]
+  ],
+  "electrolyte and methods": [
+    ["10.1002/adma.202405230", "Advanced Materials", "Accepted"],
+    ["10.1103/physrevlett.109.266101", "Physical Review Letters", "Accepted"],
+    ["10.1021/acsenergylett.6b00620", "ACS Energy Letters", "Accepted"],
+    ["10.1021/jacs.4c01221", "Journal of the American Chemical Society", "Accepted"],
+    ["10.1038/s41524-025-01832-x", "npj Computational Materials", "Accepted"],
+    ["10.1038/s41467-022-30994-1", "Nature Communications", "Accepted"]
+  ],
+  "AI intersection": [
+    ["10.1016/j.ensm.2024.103842", "Energy Storage Materials", "Accepted"],
+    ["10.1038/s41586-020-1994-5", "Nature", "Accepted"],
+    ["10.1021/jacs.4c12174", "Journal of the American Chemical Society", "Accepted"],
+    ["10.1038/s41467-025-58871-7", "Nature Communications", "Accepted"],
+    ["10.1038/s42256-021-00312-3", "Nature Machine Intelligence", "Accepted"]
+  ],
+  "reviews": [
+    ["10.1021/acs.chemrev.1c00800", "Chemical Reviews", "Accepted"],
+    ["10.1021/acs.chemrev.1c00690", "Chemical Reviews", "Accepted"],
+    ["10.1021/acs.chemrev.1c00904", "Chemical Reviews", "Accepted"],
+    ["10.1021/acs.chemrev.8b00763", "Chemical Reviews", "Accepted"],
+    ["10.1002/aenm.202400564", "Advanced Energy Materials", "Accepted"]
+  ],
+  "experimental controls": [
+    ["10.1038/s41467-022-33931-4", "Nature Communications", "Rejected"],
+    ["10.1002/adma.202101259", "Advanced Materials", "Rejected"],
+    ["10.1038/s41467-024-54319-6", "Nature Communications", "Rejected"],
+    ["10.1002/anie.202304420", "Angewandte Chemie International Edition", "Rejected"],
+    ["10.1038/s41467-022-32139-w", "Nature Communications", "Rejected"]
+  ],
+  "missing or weak evidence": [
+    ["10.1038/s41560-023-01280-1", "Nature Energy", "Pending"],
+    ["10.1038/s41563-021-01172-3", "Nature Materials", "Pending"],
+    ["10.1038/s41557-024-01689-5", "Nature Chemistry", "Pending"],
+    ["10.1039/d3cs00913k", "Chemical Society Reviews", "Pending"]
+  ],
+  "outside whitelist": [
+    ["10.1038/s41598-024-60063-0", null, "Excluded"],
+    ["10.1016/j.ijhydene.2024.07.409", null, "Excluded"],
+    ["10.1002/advs.202504997", null, "Excluded"],
+    ["10.3390/molecules30020230", null, "Excluded"],
+    ["10.1021/acs.jpcb.1c05744", null, "Excluded"]
+  ],
+  "non-research": [
+    ["10.1002/aenm.71625", "Advanced Energy Materials", "Rejected"],
+    ["10.1038/s41524-024-01500-6", "npj Computational Materials", "Excluded"]
+  ]
+}

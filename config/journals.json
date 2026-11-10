@@ -1,0 +1,355 @@
+[
+  {
+    "name": "Nature",
+    "tier": "Core",
+    "issns": [
+      "0028-0836",
+      "1476-4687"
+    ],
+    "issn_l": "0028-0836",
+    "openalex": "https://openalex.org/S137773608",
+    "catalog_title": "Nature",
+    "catalog_aliases": []
+  },
+  {
+    "name": "Science",
+    "tier": "Core",
+    "issns": [
+      "0036-8075",
+      "0193-4511",
+      "1095-9203"
+    ],
+    "issn_l": "0036-8075",
+    "openalex": "https://openalex.org/S3880285",
+    "catalog_title": "Science",
+    "catalog_aliases": [
+      "Science on-line",
+      "Science online",
+      "Science magazine online",
+      "Science magazine on-line"
+    ]
+  },
+  {
+    "name": "Nature Energy",
+    "tier": "Core",
+    "issns": [
+      "2058-7546"
+    ],
+    "issn_l": "2058-7546",
+    "openalex": "https://openalex.org/S2764528046",
+    "catalog_title": "Nature Energy",
+    "catalog_aliases": []
+  },
+  {
+    "name": "Nature Materials",
+    "tier": "Core",
+    "issns": [
+      "1476-1122",
+      "1476-4660"
+    ],
+    "issn_l": "1476-1122",
+    "openalex": "https://openalex.org/S103895331",
+    "catalog_title": "Nature Materials",
+    "catalog_aliases": []
+  },
+  {
+    "name": "Nature Chemistry",
+    "tier": "Core",
+    "issns": [
+      "1755-4330",
+      "1755-4349"
+    ],
+    "issn_l": "1755-4330",
+    "openalex": "https://openalex.org/S202193212",
+    "catalog_title": "Nature Chemistry",
+    "catalog_aliases": [
+      "Chemistry"
+    ]
+  },
+  {
+    "name": "Nature Catalysis",
+    "tier": "Core",
+    "issns": [
+      "2520-1158"
+    ],
+    "issn_l": "2520-1158",
+    "openalex": "https://openalex.org/S4210229375",
+    "catalog_title": "Nature Catalysis",
+    "catalog_aliases": []
+  },
+  {
+    "name": "Journal of the American Chemical Society",
+    "tier": "Core",
+    "issns": [
+      "0002-7863",
+      "1520-5126",
+      "1943-2984"
+    ],
+    "issn_l": "0002-7863",
+    "openalex": "https://openalex.org/S111155417",
+    "catalog_title": "Journal of the American Chemical Society",
+    "catalog_aliases": [
+      "Journal of the American Chemical Society on disc",
+      "JACS"
+    ]
+  },
+  {
+    "name": "Angewandte Chemie International Edition",
+    "tier": "Core",
+    "issns": [
+      "1433-7851",
+      "1521-3773"
+    ],
+    "issn_l": "1433-7851",
+    "openalex": "https://openalex.org/S67393510",
+    "catalog_title": "Angewandte Chemie International Edition",
+    "catalog_aliases": []
+  },
+  {
+    "name": "Energy & Environmental Science",
+    "tier": "Core",
+    "issns": [
+      "1754-5692",
+      "1754-5706"
+    ],
+    "issn_l": "1754-5692",
+    "openalex": "https://openalex.org/S117082959",
+    "catalog_title": "Energy & Environmental Science",
+    "catalog_aliases": [
+      "Energy and environmental science"
+    ]
+  },
+  {
+    "name": "Joule",
+    "tier": "Core",
+    "issns": [
+      "2542-4351",
+      "2542-4785"
+    ],
+    "issn_l": "2542-4351",
+    "openalex": "https://openalex.org/S2898305631",
+    "catalog_title": "Joule",
+    "catalog_aliases": []
+  },
+  {
+    "name": "Chem",
+    "tier": "Core",
+    "issns": [
+      "2451-9294",
+      "2451-9308"
+    ],
+    "issn_l": "2451-9294",
+    "openalex": "https://openalex.org/S2898106599",
+    "catalog_title": "Chem",
+    "catalog_aliases": []
+  },
+  {
+    "name": "Nature Communications",
+    "tier": "Specialist",
+    "issns": [
+      "2041-1723"
+    ],
+    "issn_l": "2041-1723",
+    "openalex": "https://openalex.org/S64187185",
+    "catalog_title": "Nature Communications",
+    "catalog_aliases": []
+  },
+  {
+    "name": "Science Advances",
+    "tier": "Specialist",
+    "issns": [
+      "2375-2548"
+    ],
+    "issn_l": "2375-2548",
+    "openalex": "https://openalex.org/S2737427234",
+    "catalog_title": "Science Advances",
+    "catalog_aliases": [
+      "Sci Adv"
+    ]
+  },
+  {
+    "name": "ACS Catalysis",
+    "tier": "Specialist",
+    "issns": [
+      "2155-5435"
+    ],
+    "issn_l": "2155-5435",
+    "openalex": "https://openalex.org/S37391459",
+    "catalog_title": "ACS Catalysis",
+    "catalog_aliases": [
+      "American Chemical Society catalysis"
+    ]
+  },
+  {
+    "name": "ACS Energy Letters",
+    "tier": "Specialist",
+    "issns": [
+      "2380-8195"
+    ],
+    "issn_l": "2380-8195",
+    "openalex": "https://openalex.org/S2764414965",
+    "catalog_title": "ACS Energy Letters",
+    "catalog_aliases": [
+      "American Chemical Society energy letters"
+    ]
+  },
+  {
+    "name": "Advanced Materials",
+    "tier": "Specialist",
+    "issns": [
+      "0935-9648",
+      "1521-4095"
+    ],
+    "issn_l": "0935-9648",
+    "openalex": "https://openalex.org/S99352657",
+    "catalog_title": "Advanced Materials",
+    "catalog_aliases": [
+      "Advanced optical materials",
+      "Advanced energy materials",
+      "Advanced healthcare materials"
+    ]
+  },
+  {
+    "name": "Advanced Energy Materials",
+    "tier": "Specialist",
+    "issns": [
+      "1614-6832",
+      "1614-6840"
+    ],
+    "issn_l": "1614-6832",
+    "openalex": "https://openalex.org/S2502627819",
+    "catalog_title": "Advanced Energy Materials",
+    "catalog_aliases": []
+  },
+  {
+    "name": "Chemical Science",
+    "tier": "Specialist",
+    "issns": [
+      "2041-6520",
+      "2041-6539"
+    ],
+    "issn_l": "2041-6520",
+    "openalex": "https://openalex.org/S184645833",
+    "catalog_title": "Chemical Science",
+    "catalog_aliases": [
+      "Chemical Science (Web)"
+    ]
+  },
+  {
+    "name": "Energy Storage Materials",
+    "tier": "Specialist",
+    "issns": [
+      "2405-8289",
+      "2405-8297"
+    ],
+    "issn_l": "2405-8289",
+    "openalex": "https://openalex.org/S2764728150",
+    "catalog_title": "Energy storage materials",
+    "catalog_aliases": []
+  },
+  {
+    "name": "Nature Computational Science",
+    "tier": "Specialist",
+    "issns": [
+      "2662-8457"
+    ],
+    "issn_l": "2662-8457",
+    "openalex": "https://openalex.org/S4210228084",
+    "catalog_title": "Nature Computational Science",
+    "catalog_aliases": []
+  },
+  {
+    "name": "Nature Machine Intelligence",
+    "tier": "Specialist",
+    "issns": [
+      "2522-5839"
+    ],
+    "issn_l": "2522-5839",
+    "openalex": "https://openalex.org/S2912241403",
+    "catalog_title": "Nature Machine Intelligence",
+    "catalog_aliases": []
+  },
+  {
+    "name": "npj Computational Materials",
+    "tier": "Specialist",
+    "issns": [
+      "2057-3960"
+    ],
+    "issn_l": "2057-3960",
+    "openalex": "https://openalex.org/S4210232664",
+    "catalog_title": "npj Computational Materials",
+    "catalog_aliases": [
+      "Computational materials"
+    ]
+  },
+  {
+    "name": "Physical Review Letters",
+    "tier": "Specialist",
+    "issns": [
+      "0031-9007",
+      "1079-7114",
+      "1092-0145"
+    ],
+    "issn_l": "0031-9007",
+    "openalex": "https://openalex.org/S24807848",
+    "catalog_title": "Physical Review Letters",
+    "catalog_aliases": [
+      "Physical review letters online",
+      "Physical review letters on CD-ROM",
+      "PRL"
+    ]
+  },
+  {
+    "name": "Nature Reviews Materials",
+    "tier": "Review",
+    "issns": [
+      "2058-8437"
+    ],
+    "issn_l": "2058-8437",
+    "openalex": "https://openalex.org/S2764917516",
+    "catalog_title": "Nature Reviews Materials",
+    "catalog_aliases": [
+      "Materials"
+    ]
+  },
+  {
+    "name": "Nature Reviews Chemistry",
+    "tier": "Review",
+    "issns": [
+      "2397-3358"
+    ],
+    "issn_l": "2397-3358",
+    "openalex": "https://openalex.org/S4210174246",
+    "catalog_title": "Nature Reviews Chemistry",
+    "catalog_aliases": [
+      "Chemistry"
+    ]
+  },
+  {
+    "name": "Chemical Reviews",
+    "tier": "Review",
+    "issns": [
+      "0009-2665",
+      "1520-6890"
+    ],
+    "issn_l": "0009-2665",
+    "openalex": "https://openalex.org/S41143188",
+    "catalog_title": "Chemical Reviews",
+    "catalog_aliases": []
+  },
+  {
+    "name": "Chemical Society Reviews",
+    "tier": "Review",
+    "issns": [
+      "0306-0012",
+      "1460-4744"
+    ],
+    "issn_l": "0306-0012",
+    "openalex": "https://openalex.org/S316438",
+    "catalog_title": "Chemical Society Reviews",
+    "catalog_aliases": [
+      "CSR",
+      "Reviews - Chemical Society."
+    ]
+  }
+]

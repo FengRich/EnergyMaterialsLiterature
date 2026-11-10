@@ -1,0 +1,30 @@
+{
+  "domains": {
+    "Battery": "\\b(batter(?:y|ies)|cathode|anode|intercalation|solid electrolyte interphase|cathode electrolyte interphase|lithium plating|dendrit\\w+|SEI|CEI)\\b",
+    "Electrocatalysis": "\\b(electrocatal\\w*|electrolys\\w*|electroreduc\\w*|electrooxid\\w*|water splitting|electrochemical (?:reduction|oxidation|conversion|synthesis)|(?:oxygen|hydrogen) evolution(?: reaction)?|oxygen reduction|(?:carbon dioxide|CO[₂2]|nitrate|nitrogen) reduction|CO2RR|CORR|HER|OER|ORR|NRR|NO3RR|electroorganic|electro-organic)\\b",
+    "Electrolyte": "\\b(electrolyte\\w*|solvation|desolvation|(?:electric|electrical|electrochemical) double layer|electrode[–— -]+electrolyte|ionic liquid\\w*|deep eutectic|ion(?:ic)? transport|ionic conductivity|ion conduction|interfacial electric field|constant electrode potential)\\b"
+  },
+  "methods": {
+    "DFT": "\\b(DFT(?:\\s*\\+\\s*U)?|density functional theory|first[ -]principles)\\b",
+    "AIMD": "\\b(AIMD|ab initio molecular dynamics|first[ -]principles molecular dynamics)\\b",
+    "Molecular dynamics": "\\b(molecular dynamics|reactive MD|ReaxFF)\\b",
+    "Constant potential": "\\b(constant[ -]potential (?:molecular dynamics|simulations?|calculations?|methods?)|constant electrode potential|grand[ -]canonical (?:DFT|density functional theory|simulations?))\\b",
+    "Free energy / sampling": "\\b(enhanced sampling|metadynamics|umbrella sampling|free[ -]energy (?:calculations?|landscape|profile|perturbation)|thermodynamic integration)\\b",
+    "Kinetics / Monte Carlo": "\\b(microkinetic\\w*|kinetic Monte Carlo|kMC)\\b",
+    "Continuum / multiscale": "\\b(phase[ -]field|finite[ -]element|multiscale (?:models?|modeling|modelling|simulations?))\\b",
+    "Machine learning": "\\b(machine[ -]learning|deep[ -]learning|neural networks?|graph neural networks?|random forest|support vector machines?|artificial intelligence)\\b",
+    "Machine learning potentials": "\\b(MLIPs?|machine[ -]learn\\w+ (?:interatomic )?potentials?|neural network potentials?|equivariant interatomic potentials?|deep potentials?)\\b",
+    "Active learning / optimization": "\\b(active learning|Bayesian optimi[sz]ation|Gaussian process\\w*)\\b",
+    "Generative AI / agents": "\\b(generative (?:AI|models?)|diffusion models?|large language models?|LLMs?|AI agents?|AI[ -]assisted)\\b",
+    "Other simulation": "\\b(computational screening|atomistic simulat\\w+|quantum chemistr\\w+|numerical (?:simulations?|modeling|modelling)|computational fluid dynamics|Monte Carlo simulations?)\\b"
+  },
+  "strong": "\\b(calculat\\w+|simulat\\w+|predict\\w+|train\\w+|screen\\w+|model\\w*|comput\\w+|algorithm\\w*|reveal\\w*|show\\w*|using|via|framework|benchmark\\w*|demonstrat\\w*|employ\\w*|perform\\w*|accelerat\\w*|design\\w*|optimi[sz]\\w*|estimat\\w*|pipeline|landscape|potential\\w*)\\b",
+  "weak": "\\b(future work|could be used|may be useful|has been suggested|previous (?:studies|work)|remains to be|would benefit from)\\b",
+  "experimental": "\\b(experimental study|experiments only|measur\\w+|synthesi[sz]\\w+|fabricat\\w+|operando|electrochemical performance|galvanostatic|spectroscop\\w+|characteriz\\w+)\\b",
+  "ranking": {
+    "electrode[–— -]+electrolyte|electrochemical interface|solvation|desolvation|double layer|ionic liquid|deep eutectic|(?:locali[sz]ed )?high[ -]concentration electrolyte": 8,
+    "machine[ -]learn\\w*|neural networks?|artificial intelligence|active learning|bayesian optimi[sz]ation|generative|large language models?": 6,
+    "\\bDFT\\b|density functional theory|\\bAIMD\\b|ab initio molecular dynamics|interatomic potentials?|constant[ -]potential|grand[ -]canonical|new theoretical": 4
+  },
+  "representative_limit": 15
+}
