@@ -1,6 +1,6 @@
 # V1.0 验收记录
 
-验证日期为 2026-11-10（北京时间）。托管端验收需在获得公开部署授权后进行。
+验证日期为 2026-11-10（北京时间）。
 
 | 验收项 | 实测结果 |
 | --- | --- |
@@ -11,7 +11,9 @@
 | 补跑 | 生产同步入口完成真实同周补跑，2,087 → 2,090 条。原有记录与首见时间全部保留，DOI 唯一，周报仍为一份。增量 Crossref 扫描 6,388 条返回记录。 |
 | 网站与 RSS | 在 Edge 通过 HTTP 子路径以 343 篇正式收录论文检查首页及四个导航页。实测 DOI 搜索、期刊与领域组合过滤、时间排序、详情展开。1365px 桌面截图与 390px 手机检查通过，五页均无横向溢出和 JavaScript 异常。首版 RSS 的三条真实条目均可解析，GUID 唯一，日期有效。 |
 | 工作流 | Python 3.14.10 的 22 项自动化测试通过。Actionlint 1.7.12 校验两份工作流。北京时间周一 09:00 对应 UTC 周一 01:00，定时触发配置和手动入口均已检查。 |
-| 托管端 | GitHub Pages 的公开访问、实际定时触发和自动部署待授权后验收。 |
+| 托管端 | 手动触发的同步、构建与部署成功。五个 HTML 页面、CSS、JavaScript 和 RSS 均返回 HTTPS 200。线上文献库含 348 篇，RSS 的 3 条记录均有唯一 GUID、HTTPS 链接和可解析日期。定时触发按工作流配置执行，首次定时运行可在 Actions 历史中核对。 |
+
+[公开网站](https://fengrich.github.io/EnergyMaterialsLiterature/) · [RSS](https://fengrich.github.io/EnergyMaterialsLiterature/feed.xml) · [成功的手动运行](https://github.com/FengRich/EnergyMaterialsLiterature/actions/runs/42785837428)
 
 本地浏览器验收使用从真实 API 获取的专用样本，周报归属用于测试页面和排序。抽样结果只说明本组样本。检索完整性受出版方索引时差、上游速率限制、摘要可用性与规则精度影响。
 

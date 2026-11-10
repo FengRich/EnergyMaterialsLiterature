@@ -2,7 +2,9 @@
 
 ## 当前阶段
 
-Phase 5 本地验收通过。初始回溯从 2026-08-10 开始，两源一度同时失败，随后从 1,782 条检查点接续到 2026-11-08，再同步本周数据。初始同步保存 2,087 条。真实同周补跑后保存 2,090 条，其中 343 Accepted、1,173 Pending、574 Rejected。所有原有记录和首见时间保留，DOI 唯一，一份周报，三条 RSS 代表论文。最新成功同步起始时间为 2026-11-10 16:18（北京时间）。
+Phase 5 已完成首次公开部署及线上验收。2026-11-10 16:51（北京时间）的手动运行保存 2,106 条记录，其中 348 Accepted、1,172 Pending、586 Rejected。同步、构建和部署均通过，工作流已生成可恢复快照。公开页面、静态资源和 RSS 均返回 HTTPS 200。
+
+[GitHub Pages](https://fengrich.github.io/EnergyMaterialsLiterature/) · [RSS](https://fengrich.github.io/EnergyMaterialsLiterature/feed.xml) · [手动运行记录](https://github.com/FengRich/EnergyMaterialsLiterature/actions/runs/42785837428)
 
 ## 已完成
 
@@ -12,14 +14,10 @@ Phase 5 本地验收通过。初始回溯从 2026-08-10 开始，两源一度同
 - Phase 4。Actions 计划与手动入口、写锁、校验、Git 快进、快照。实测拒绝陈旧推送，恢复真实记录、周报和人工审核。
 - Phase 5。42 篇真实 DOI 的期刊与筛选预期全部匹配。真实 DOI 跨源合并和 Semantic Scholar 核对成功。Python 3.14.10 的 22 项自动化测试和 actionlint 1.7.12 工作流校验通过。详见 docs/acceptance.md。
 
-## READY
+## 后续运行
 
-- 本地交付已准备。获得公开授权后，创建指定 GitHub 仓库、配置 Actions Pages、执行手动同步和首次发布，随后检查 HTTPS、调度和 RSS。
-
-## BLOCKED
-
-- 公开建仓、Pages 部署、托管端实际定时触发与公开可访问性验收需要用户授权。
-- OpenAlex 匿名限流影响 2026-10-19 至 2026-11-08 的三段历史查询与最近两次同步。Crossref 和 Semantic Scholar 已成功，后续同步会逐批重试缺段。网站会展示异常。
+- 每周一北京时间 09:00 运行，保留手动入口。线上已验证手动触发，首次定时触发可在 Actions 运行历史中核对。
+- 最新手动运行的 Crossref、OpenAlex 和 Semantic Scholar 均成功。OpenAlex 的 2026-10-26 至 2026-11-01 历史区间仍受 HTTP 429 影响，后续同步会重试，首页保留提示。
 
 ## 恢复
 
